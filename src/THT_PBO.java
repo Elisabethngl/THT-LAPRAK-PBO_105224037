@@ -1,46 +1,53 @@
-
 import java.util.Scanner;
 
 public class THT_PBO {
     public static void main(String[] args) {
         
-        //input dari user
-        Scanner input = new Scanner(System.in);
-        System.out.println("--- SISTEM LOGICALC FASTSEND ---");
+        // Memulai input scanner
+        Scanner sc = new Scanner(System.in);
+        System.out.println("=== SISTEM LOGICALC FASTSEND ===");
         
         System.out.print("Masukkan Nama Klien : ");
-        String namaKlien = input.nextLine();
+        String namaPelanggan = sc.nextLine(); // [cite: 13]
         
         System.out.print("Masukkan Berat (Kg) : ");
-        double berat = input.nextDouble();
+        double beratBarang = sc.nextDouble(); // [cite: 14]
         
         System.out.print("Masukkan Jarak (Km) : ");
-        int jarak = input.nextInt();
+        int jarakTempuh = sc.nextInt(); // [cite: 15]
         
         System.out.print("Masukkan Jumlah Box : ");
-        int jumlahBox = input.nextInt();
+        int totalBox = sc.nextInt(); // [cite: 16]
         
-        //data yang harus diolah program
-        int kapasitasTruk = 150, trukPenuh = jumlahBox / kapasitasTruk, sisaBox = jumlahBox % kapasitasTruk;
-        int tarifJarak = 15000;
-        double tarifBerat = 5500, dasarBiaya = (tarifJarak * jarak) + (tarifBerat * berat),
-                asuransi = dasarBiaya * 0.035, totalBayar = dasarBiaya + asuransi;
-        int jam = jarak / 60, menit = jarak % 60;
+        // Proses perhitungan logistik
+        int muatanTruk = 150; // Kapasitas maksimal per truk [cite: 19]
+        int jmlTruk = totalBox / muatanTruk; // Menghitung truk penuh [cite: 20]
+        int sisaPaket = totalBox % muatanTruk; // Sisa box menggunakan modulus [cite: 21]
         
-        // Output
+        // Kalkulasi rincian biaya
+        double biayaJarak = jarakTempuh * 15000.0; // Tarif Rp 15.000/Km [cite: 23]
+        double biayaBerat = beratBarang * 5500.0; // Tarif Rp 5.500/Kg [cite: 24]
+        double totalDasar = biayaJarak + biayaBerat; // Dasar Biaya 
+        double biayaAsuransi = totalDasar * 0.035; // Asuransi 3.5% [cite: 26]
+        double tagihanAkhir = totalDasar + biayaAsuransi; // Total Tagihan [cite: 27]
+        
+        // Konversi waktu perjalanan (60 km/jam)
+        int estimasiJam = jarakTempuh / 60; // [cite: 32]
+        int estimasiMenit = jarakTempuh % 60; // [cite: 32]
+        
+        // Menampilkan Output sesuai template
         System.out.println("\n--- RESI PENGIRIMAN ---");
-        System.out.println("Klien            : " + namaKlien);
-        System.out.println("Total Box        : " + jumlahBox + " box");
-        System.out.println("Kebutuhan Armada : " + trukPenuh + " Truk Penuh dan sisa " + sisaBox + " box via Pikap");
+        System.out.println("Klien            : " + namaPelanggan);
+        System.out.println("Total Box        : " + totalBox + " box");
+        System.out.println("Kebutuhan Armada : " + jmlTruk + " Truk Penuh dan sisa " + sisaPaket + " box via Pikap");
         
-        System.out.println("\nEstimasi Waktu   : " + jam + " Jam " + menit + " Menit (Asumsi 60km/jam)");
+        System.out.println("\nEstimasi Waktu   : " + estimasiJam + " Jam " + estimasiMenit + " Menit (Asumsi 60km/jam)");
         
         System.out.println("\n--- RINCIAN BIAYA ---");
-        System.out.println("Dasar Biaya      : Rp " + dasarBiaya);
-        System.out.println("Asuransi (3.5%)  : Rp " + asuransi);
+        System.out.println("Dasar Biaya      : Rp " + totalDasar);
+        System.out.println("Asuransi (3.5%)  : Rp " + biayaAsuransi);
         System.out.println("------------------------------------");
-        System.out.println("TOTAL BAYAR      : Rp " + totalBayar);
+        System.out.println("TOTAL BAYAR      : Rp " + tagihanAkhir);
         System.out.println("====================================");
     }
 }
-   
