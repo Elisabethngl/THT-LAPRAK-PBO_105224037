@@ -49,5 +49,6 @@ public class THT_PBO {
         System.out.println("------------------------------------");
         System.out.println("TOTAL BAYAR      : Rp " + tagihanAkhir);
         System.out.println("====================================");
+        sc.close();
     }
 }
